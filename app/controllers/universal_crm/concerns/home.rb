@@ -134,7 +134,7 @@ module UniversalCrm
                 logger.warn "Direct to ticket"
                 ticket = UniversalCrm::Ticket.find_by(token: /^#{token}$/i)
                 ticket_subject = ticket.subject
-                user = (ticket_subject.subject.class.to_s == Universal::Configuration.class_name_user.to_s ? ticket_subject.subject : nil),
+                user = (ticket_subject.class.to_s == Universal::Configuration.class_name_user.to_s ? ticket_subject : nil),
                 if !ticket.nil?
                   ticket.open!(user)
                   ticket.update(kind: :email)
@@ -146,7 +146,8 @@ module UniversalCrm
                                           author: (ticket_subject.nil? ? 'Unknown' : ticket_subject.name),
                                           incoming: true,
                                           subject_name: ticket.name,
-                                          subject_kind: ticket.kind
+                                          subject_kind: ticket.kind,
+                                          subject: ticket_subject
                   
                   logger.warn comment.errors.to_json
                 end
