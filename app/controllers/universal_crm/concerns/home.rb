@@ -10,8 +10,12 @@ module UniversalCrm
           #list all tickets  
         end
         
-        def init          
-          users = Universal::Configuration.class_name_user.classify.constantize.where('_ugf.crm' => {'$ne' => nil})
+        def init
+          if UniversalAccess::Configuration.scoped_user_groups
+            users = Universal::Configuration.class_name_user.classify.constantize.where("_ugf.crm.#{universal_scope.id.to_s}" => {'$ne' => nil})
+          else
+            users = Universal::Configuration.class_name_user.classify.constantize.where('_ugf.crm' => {'$ne' => nil})
+          end
           puts users.length
           users = users.where(Universal::Configuration.user_scope_field => universal_scope.id) if !universal_scope.nil? and !Universal::Configuration.user_scope_field.blank?
           users = users.sort_by{|a| a.name}.map{|u| {name: u.name, 
