@@ -16,7 +16,6 @@ module UniversalCrm
           else
             users = Universal::Configuration.class_name_user.classify.constantize.where('_ugf.crm' => {'$ne' => nil})
           end
-          puts users.length
           users = users.where(Universal::Configuration.user_scope_field => universal_scope.id) if !universal_scope.nil? and !Universal::Configuration.user_scope_field.blank?
           users = users.sort_by{|a| a.name}.map{|u| {name: u.name, 
               email: u.email, 
@@ -137,9 +136,9 @@ module UniversalCrm
               if to[0,3] == 'tk-'
                 logger.warn "Direct to ticket"
                 ticket = UniversalCrm::Ticket.find_by(token: /^#{token}$/i)
-                ticket_subject = ticket.subject
-                user = (ticket_subject.class.to_s == Universal::Configuration.class_name_user.to_s ? ticket_subject : nil),
                 if !ticket.nil?
+                  ticket_subject = ticket.subject
+                  user = (ticket_subject.class.to_s == Universal::Configuration.class_name_user.to_s ? ticket_subject : nil)
                   ticket.open!(user)
                   ticket.update(kind: :email)
                   comment = ticket.comments.create content: params['TextBody'].hideQuotedLines,

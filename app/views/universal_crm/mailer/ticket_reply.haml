@@ -10,11 +10,6 @@
 
 = simple_format auto_link(@comment.content)
 
-- if !@comment.user.blank?
-  %h4 From: #{@comment.user.name}
-- elsif !@comment.author.blank?
-  %h4 From: #{@comment.author}
-
 - if !@config.email_footer.blank?
   %p= '------------------------------------------------------'
   = simple_format auto_link(@config.email_footer)
