@@ -91,7 +91,8 @@ var ConfigForm = React.createClass({
           {this.functionCheckbox('advanced_search', 'Advanced search')}
           {this.functionCheckbox('tasks', 'Tasks')}
           {this.functionCheckbox('companies', 'Companies')}
-          {this.functionCheckbox('edit_companies', 'Edit Companies')}
+          {this.functionCheckbox('edit_companies', 'Edit companies')}
+          {this.functionCheckbox('forward_tickets', 'Forward tickets to external email')}
           {this.functionCheckbox('newsfeed', 'Newsfeed (Recent comments/notes)')}
         </fieldset>
         <div className="form-group">

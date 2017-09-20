@@ -201,5 +201,15 @@ module UniversalCrm
       render json: {}
     end
     
+    #forward to an external email address
+    def forward
+      @ticket = UniversalCrm::Ticket.find(params[:id])
+      # begin
+        UniversalCrm::Mailer.forward_ticket(universal_crm_config, @ticket, params[:email].strip).deliver_now
+        # rescue
+        # end
+      render json: {status: 200, email: params[:email]}
+    end
+    
   end
 end

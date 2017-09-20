@@ -1,0 +1,7 @@
+%p You have been forwarded the following CRM ticket:
+%p= '------------------------------------------------------'
+%h3 Original subject: #{@ticket.title}
+%h3 Original sender: #{@ticket.from_email}
+= simple_format auto_link(@ticket.content)
+%p= '------------------------------------------------------'
+%h3 Do not reply to this email as it will not be received.

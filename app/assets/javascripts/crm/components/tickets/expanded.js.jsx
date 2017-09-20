@@ -35,6 +35,7 @@ var ExpandedTicket = React.createClass({
           {this.ticketDocument()}
           {this.referringUrl()}
           {this.ticketNotes()}
+          {this.forwardToEmail()}
           <div className="panel">
             <div className="panel-body">
               <Attachments subjectId={this.props.ticket.id} subjectType='UniversalCrm::Ticket' gs={this.props.gs} />
@@ -94,6 +95,9 @@ var ExpandedTicket = React.createClass({
         </blockquote>
       );
     }
+  },
+  forwardToEmail: function(){
+    return(<ForwardTicket gs={this.props.gs} ticketId={this.props.ticket.id} />);
   },
   ticketOpen: function(){
     return ((this.props.ticket.status == 'active' || this.actioned()) && (this.props.gs.config.inbound_email_addresses.indexOf(this.props.ticket.from_email)<0));

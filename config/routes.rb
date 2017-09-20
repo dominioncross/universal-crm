@@ -45,6 +45,7 @@ UniversalCrm::Engine.routes.draw do
   resources :tickets do
     member do
       patch :update_status, :flag, :update_customer, :assign_user, :editing, :update_due_on
+      post :forward
     end
   end
   resources :comments

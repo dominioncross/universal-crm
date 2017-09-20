@@ -41,5 +41,15 @@ module UniversalCrm
       end      
     end
     
+    def forward_ticket(config, ticket, email_address)
+      if !config.transaction_email_address.blank?
+        @config = config
+        @ticket = ticket
+        mail  to: to(email_address, config.test_email),
+              from: "#{config.transaction_email_from} <#{config.transaction_email_address}>",
+              subject: "#{config.system_name} Ticket forwarded from #{ticket.from_email}"
+      end 
+    end
+    
   end
 end
