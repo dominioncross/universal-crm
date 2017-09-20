@@ -204,10 +204,11 @@ module UniversalCrm
     #forward to an external email address
     def forward
       @ticket = UniversalCrm::Ticket.find(params[:id])
-      # begin
+      begin
         UniversalCrm::Mailer.forward_ticket(universal_crm_config, @ticket, params[:email].strip).deliver_now
-        # rescue
-        # end
+      rescue
+      end
+      @ticket.save_comment!("Ticket forwarded to: #{params[:email]}", universal_user, universal_scope)
       render json: {status: 200, email: params[:email]}
     end
     
