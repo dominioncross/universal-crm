@@ -3,7 +3,7 @@
   global ReactDOM
   global $
  */ 
-var AssignUser = React.createClass({
+var AssignUser = createReactClass({
   getInitialState: function(){
     return({
       loading: false,

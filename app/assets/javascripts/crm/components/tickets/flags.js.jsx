@@ -1,4 +1,4 @@
-var Flags = React.createClass({
+var Flags = createReactClass({
   
   render: function(){
     var labels = [];

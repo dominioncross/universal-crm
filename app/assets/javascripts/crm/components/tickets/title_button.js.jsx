@@ -3,7 +3,7 @@
   global ReactDOM
   global $
 */
-var TicketTitleButton = React.createClass({
+var TicketTitleButton = createReactClass({
   selectTicket: function(){
     this.props.selectTicketId(this.props.ticket.id);
   },

@@ -3,7 +3,7 @@
   global ReactDOM
   global $
 */
-var NewComment = React.createClass({
+var NewComment = createReactClass({
   getInitialState: function(){
     return({
       loading: false,

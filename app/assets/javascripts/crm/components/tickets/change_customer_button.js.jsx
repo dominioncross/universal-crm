@@ -1,4 +1,4 @@
-var ChangeCustomerButton = React.createClass({
+var ChangeCustomerButton = createReactClass({
   getInitialState: function(){
     return({
       

@@ -1,4 +1,4 @@
-var TicketCommentsCreated = React.createClass({
+var TicketCommentsCreated = createReactClass({
   render: function(){
     return (
       <div className='pull-right'>

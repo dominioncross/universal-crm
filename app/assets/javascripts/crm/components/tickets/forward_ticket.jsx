@@ -1,6 +1,6 @@
 /*global React*/
 /*global $*/
-var ForwardTicket = React.createClass({
+var ForwardTicket = createReactClass({
   getInitialState: function(){
     return({
       displayForm: false,

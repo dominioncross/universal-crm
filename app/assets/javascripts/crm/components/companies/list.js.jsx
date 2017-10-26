@@ -2,7 +2,7 @@
   global React
   global $
 */
-var CompanyList = React.createClass({
+var CompanyList = createReactClass({
   getInitialState: function(){
     return({
       companies: null,

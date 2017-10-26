@@ -1,4 +1,4 @@
-var TicketCustomerName = React.createClass({
+var TicketCustomerName = createReactClass({
   render: function(){
     if (this.props.name || this.props.email){
       return (

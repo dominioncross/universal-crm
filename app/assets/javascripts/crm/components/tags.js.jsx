@@ -1,4 +1,4 @@
-var Tags = React.createClass({
+var Tags = createReactClass({
   getInitialState: function(){
     return {
       propTags: null,

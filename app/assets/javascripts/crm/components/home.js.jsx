@@ -1,4 +1,4 @@
-var Home = React.createClass({
+var Home = createReactClass({
   
   render: function(){
     return(

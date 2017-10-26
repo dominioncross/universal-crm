@@ -3,7 +3,7 @@
   global ReactDOM
   global $
 */
-var NewEmployee = React.createClass({
+var NewEmployee = createReactClass({
   getInitialState: function(){
     return({
       subjectId: null,

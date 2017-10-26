@@ -1,7 +1,7 @@
 /*
   global React
 */
-var ExpandedTicket = React.createClass({
+var ExpandedTicket = createReactClass({
   getInitialState: function(){
     return({
       replyCount: 0

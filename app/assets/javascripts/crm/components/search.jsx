@@ -3,7 +3,7 @@
   global $
   global ReactDOM
 */
-var Search = React.createClass({
+var Search = createReactClass({
   getInitialState: function(){
     return({
       searchWord: null,

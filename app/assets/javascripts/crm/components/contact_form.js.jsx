@@ -1,4 +1,4 @@
-var ContactForm = React.createClass({
+var ContactForm = createReactClass({
   getInitialState: function(){
     return({
       name: null, email: null, subject: null, message: null

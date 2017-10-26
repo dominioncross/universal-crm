@@ -1,4 +1,4 @@
-var PageHeader = React.createClass({
+var PageHeader = createReactClass({
   home: function(){
     this.props._goHome();
   },

@@ -1,4 +1,4 @@
-var TicketListItem = React.createClass({
+var TicketListItem = createReactClass({
   getInitialState: function(){
     return ({
       status: this.props.ticket.status,

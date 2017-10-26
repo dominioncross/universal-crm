@@ -3,7 +3,7 @@
   global ReactDOM
   global $
 */
-var NewCustomer = React.createClass({
+var NewCustomer = createReactClass({
   getInitialState: function(){
     return({
       name: null,

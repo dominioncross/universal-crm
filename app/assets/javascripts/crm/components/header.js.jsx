@@ -1,4 +1,4 @@
-var Header = React.createClass({
+var Header = createReactClass({
   componentDidMount: function(){
   },
   systemName: function(){

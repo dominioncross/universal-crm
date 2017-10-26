@@ -1,4 +1,4 @@
-var HelpdeskPreview = React.createClass({
+var HelpdeskPreview = createReactClass({
   getInitialState: function(){
     return({
       tickets: null,

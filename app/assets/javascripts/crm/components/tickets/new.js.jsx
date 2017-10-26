@@ -3,7 +3,7 @@
   global ReactDOM
   global $
  */ 
-var NewTicket = React.createClass({
+var NewTicket = createReactClass({
   getInitialState: function(){
     return({
       title: '',

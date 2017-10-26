@@ -1,7 +1,7 @@
 /*
   global React
 */
-var Comment = React.createClass({
+var Comment = createReactClass({
   
   render: function(){
     var commentClass;

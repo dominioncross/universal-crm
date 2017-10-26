@@ -2,7 +2,7 @@
   global React
   global $
 */
-var CustomerShow = React.createClass({
+var CustomerShow = createReactClass({
   render: function(){
     if (this.props.customer.id && this.props.customer){
       var newTicket = null;

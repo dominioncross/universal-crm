@@ -3,7 +3,7 @@
   global ReactDOM
   global $
 */
-var CompanyEdit = React.createClass({
+var CompanyEdit = createReactClass({
   getInitialState: function(){
     return({
       countries: []

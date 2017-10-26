@@ -3,7 +3,7 @@
   global ReactDOM
   global $
 */
-var TicketDueOn = React.createClass({
+var TicketDueOn = createReactClass({
   getInitialState: function(){
     return({
       editing: false,

@@ -1,4 +1,4 @@
-var BrandLogo = React.createClass({
+var BrandLogo = createReactClass({
   
   render: function(){
     return(

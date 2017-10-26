@@ -2,7 +2,7 @@
   global React
   global $
 */
-var CompanyShow = React.createClass({
+var CompanyShow = createReactClass({
   render: function(){
     if (this.props.company.id && this.props.company){
       var newTicket = null;

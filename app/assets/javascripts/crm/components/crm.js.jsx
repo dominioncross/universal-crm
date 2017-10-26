@@ -2,7 +2,7 @@
   global $
   global React
 */
-var CRM = React.createClass({
+var CRM = createReactClass({
   getInitialState: function(){
     return {
       gs: {},

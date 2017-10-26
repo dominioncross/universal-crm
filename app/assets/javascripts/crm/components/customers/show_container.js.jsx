@@ -1,4 +1,4 @@
-var CustomerShowContainer = React.createClass({
+var CustomerShowContainer = createReactClass({
   getInitialState: function(){
     return {
       edit: false,
