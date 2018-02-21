@@ -10,12 +10,15 @@ var TicketTitleButton = createReactClass({
   render: function(){
     if (this.props.ticket){
       return(
-        <div onClick={this.selectTicket} style={{cursor: 'pointer', fontWeight: 'bold'}}>
-          <div className='pull-right small hidden-xs'>Ticket: #{this.props.ticket.number}</div>
+        <div>
+          <div className='pull-right hidden-xs'>Ticket: #{this.props.ticket.number}</div>
           {this.statusLabel()}
           {this.ticketIcon()}
-          {this.props.ticket.title}
-          <TicketDueOn ticket={this.props.ticket} margin={true} editable={false} />
+          <div className="pull-right"><QuickClose ticket={this.props.ticket} gs={this.props.gs} sgs={this.props.sgs} /></div>
+          <span style={{cursor: 'pointer', fontWeight: 'bold'}} onClick={this.selectTicket}>
+            {this.props.ticket.title}
+          </span>
+          <TicketDueOn ticket={this.props.ticket} margin={false} editable={false} />
           <Flags flags={this.props.ticket.flags} gs={this.props.gs} />
           {this.tags()}
         </div>  
