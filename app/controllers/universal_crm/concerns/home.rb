@@ -2,14 +2,14 @@ module UniversalCrm
   module Concerns
     module Home
       extend ActiveSupport::Concern
-      
+
       included do
         protect_from_forgery except: %w(inbound)
-        
+
         def index
-          #list all tickets  
+          #list all tickets
         end
-        
+
         def init
           if UniversalAccess::Configuration.scoped_user_groups
             users = Universal::Configuration.class_name_user.classify.constantize.where("_ugf.crm.#{universal_scope.id.to_s}" => {'$ne' => nil})
@@ -17,12 +17,12 @@ module UniversalCrm
             users = Universal::Configuration.class_name_user.classify.constantize.where('_ugf.crm' => {'$ne' => nil})
           end
           users = users.where(Universal::Configuration.user_scope_field => universal_scope.id) if !universal_scope.nil? and !Universal::Configuration.user_scope_field.blank?
-          users = users.sort_by{|a| a.name}.map{|u| {name: u.name, 
-              email: u.email, 
-              first_name: u.name.split(' ')[0].titleize, 
-              id: u.id.to_s, 
+          users = users.sort_by{|a| a.name}.map{|u| {name: u.name,
+              email: u.email,
+              first_name: u.name.split(' ')[0].titleize,
+              id: u.id.to_s,
               functions: (u.universal_user_group_functions.blank? ? [] : (UniversalAccess::Configuration.scoped_user_groups ? u.universal_user_group_functions['crm'][universal_scope.id.to_s] : u.universal_user_group_functions['crm']))}}
-          
+
           json = {config: universal_crm_config.to_json, user_count: users.length, users: users}
 
           if universal_user
@@ -48,7 +48,7 @@ module UniversalCrm
             from = params['From'].downcase
             from_name = params['FromName']
             ticket=nil
-            
+
             #check if the BCC is for our inbound addresses:
             if !bcc.blank?
               #check if it was forwarded to the bcc address:
@@ -151,7 +151,7 @@ module UniversalCrm
                                           subject_name: ticket.name,
                                           subject_kind: ticket.kind,
                                           subject: ticket_subject
-                  
+
                   logger.warn comment.errors.to_json
                 end
               end
@@ -167,7 +167,7 @@ module UniversalCrm
                 begin
                   decoded = Base64.decode64(body.to_s)
 #                 puts decoded
-                  path = "#{Rails.root}/tmp/attachments/#{Time.now.to_i}-#{filename}"
+                  path = "#{Rails.root}/tmp/#{Time.now.to_i}-#{filename}"
                   File.open(path, 'wb'){|f| f.write(decoded)}
                   att = ticket.attachments.create file: File.open(path), name: filename
                   logger.warn att.errors.to_json
@@ -175,19 +175,19 @@ module UniversalCrm
                 rescue => error
                   puts "Attachment error: #{error.to_s}"
                 end
-              end              
+              end
             end
             render json: {}
           else
             render json: {status: 200, message: "From/To not sent"}
           end
         end
-        
+
         def unload
           remove_tickets_viewing!
           render json: {}
         end
-        
+
         def dashboard
           @tickets = UniversalCrm::Ticket.unscoped
           @tickets = @tickets.scoped_to(universal_scope) if !universal_scope.nil?
@@ -222,7 +222,7 @@ module UniversalCrm
           flag_count = @tickets.map_reduce(map_flags, reduce).out(inline: true)
           flags = {}
           flag_count.sort_by{|a| -a['value'].to_i}.each do |c|
-            flags.merge!(c['_id'] => ActiveSupport::NumberHelper.number_to_delimited(c['value'].to_i))  
+            flags.merge!(c['_id'] => ActiveSupport::NumberHelper.number_to_delimited(c['value'].to_i))
           end
           render json: {
             ticket_counts: {
@@ -243,11 +243,11 @@ module UniversalCrm
             }
           }
         end
-        
+
         def search
           render json: {type: params[:search_type], results: []}
         end
-        
+
         def newsfeed
           @comments = Universal::Comment.unscoped.order_by(created_at: :desc)
           @comments = @comments.scoped_to(universal_scope) if !universal_scope.nil?
@@ -278,7 +278,7 @@ module UniversalCrm
             results: results
           }
         end
-        
+
       end
     end
   end
