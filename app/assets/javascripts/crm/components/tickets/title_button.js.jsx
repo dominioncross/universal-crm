@@ -18,13 +18,14 @@ var TicketTitleButton = createReactClass({
           <span style={{cursor: 'pointer', fontWeight: 'bold'}} onClick={this.selectTicket}>
             {this.props.ticket.title}
           </span>
+          {this.brief_body()}
           <TicketDueOn ticket={this.props.ticket} margin={false} editable={false} />
           <Flags flags={this.props.ticket.flags} gs={this.props.gs} />
           {this.tags()}
-        </div>  
+        </div>
       );
     }else{
-      return(null); 
+      return(null);
     }
   },
   ticketIcon: function(){
@@ -49,12 +50,19 @@ var TicketTitleButton = createReactClass({
     var t = [];
     for (var i=0;i<this.props.ticket.tags.length;i++){
       var tag_label = this.props.ticket.tags[i];
-      t.push(<span className="badge badge-info" key={i} style={{marginRight: '2px'}}>{tag_label}</span>);      
+      t.push(<span className="badge badge-info" key={i} style={{marginRight: '2px'}}>{tag_label}</span>);
     }
     if (t.length>0){
       return(<span style={{marginLeft: '10px'}}>{t}</span>);
     }else{
       return(null);
+    }
+  },
+  brief_body: function(){
+    if (this.props.ticket.brief_body != ''){
+      return(
+        <p className="small" style={{marginTop: 5}}>{this.props.ticket.brief_body}</p>
+      );
     }
   }
 });
