@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dominioncross/universal.git
-  revision: 5ae0e0f8909cd072ee81144ab0dad49a1d3665f2
+  revision: f89b1a5e072a308832024b240afbefb2dcb5b073
   specs:
     universal (0.0.5)
       mongoid
@@ -219,4 +219,4 @@ DEPENDENCIES
   universal-crm!
 
 BUNDLED WITH
-   1.16.6
+   1.17.3
