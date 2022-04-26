@@ -18,7 +18,7 @@ module UniversalCrm
         include Universal::Concerns::HasAttachments
         include Universal::Concerns::Employee
         
-        store_in session: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_customers'
+        store_in database: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_customers'
 
         field :n, as: :name
         field :p, as: :position
