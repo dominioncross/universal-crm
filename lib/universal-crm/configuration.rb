@@ -6,7 +6,7 @@ module UniversalCrm
     def self.reset
       self.scope_class                     = nil
       self.secondary_scope_class           = nil
-      self.mongoid_session_name            = :default
+      self.mongoid_session_name            = :forklift
     end
 
   end
