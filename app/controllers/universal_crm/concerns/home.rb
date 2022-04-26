@@ -189,49 +189,29 @@ module UniversalCrm
         end
 
         def dashboard
-          @tickets = UniversalCrm::Ticket.unscoped
-          @tickets = @tickets.scoped_to(universal_scope) if !universal_scope.nil?
           @customers = UniversalCrm::Customer.unscoped
           @customers = @customers.scoped_to(universal_scope) if !universal_scope.nil?
           @companies = UniversalCrm::Company.unscoped
           @companies = @companies.scoped_to(universal_scope) if !universal_scope.nil?
-          map = %Q{
-            function(){
-              emit({status: this._s, kind: this._kn}, 1);
-            }
-          }
-          map_flags = %Q{
-            function(){
-              if (this._fgs){
-                this._fgs.forEach(function(flag){
-                  emit(flag, 1);
-                });
-              }
-            }
-          }
-          reduce = %Q{
-            function(key, values){
-              var count = 0;
-              values.forEach(function(value){
-                count += parseInt(value);
-              });
-              return count;
-            }
-          }
-          status_count = @tickets.map_reduce(map, reduce).out(inline: 1)
-          flag_count = @tickets.map_reduce(map_flags, reduce).out(inline: 1)
+          match = {'$match': universal_scope.present? ? {scope_id: universal_scope.id, scope_type: universal_scope.class.to_s} : {}}
+          group = {'$group': {_id: {status: "$_s", kind: "$_kn"}, value: {'$sum': 1}}}
+          status_count = UniversalCrm::Ticket.collection.aggregate([match, group]).each{}
+          unwind = {'$unwind': '$_fgs'}
+          group = {'$group': {_id: "$_fgs", value: {'$sum': 1}}}
+          sort = {'$sort' => {value: -1}}
+          flag_count = UniversalCrm::Ticket.collection.aggregate([match, unwind, group, sort]).each{}
           flags = {}
-          flag_count.sort_by{|a| -a['value'].to_i}.each do |c|
+          flag_count.each do |c|
             flags.merge!(c['_id'] => ActiveSupport::NumberHelper.number_to_delimited(c['value'].to_i))
           end
           render json: {
             ticket_counts: {
-              inbox: ActiveSupport::NumberHelper.number_to_delimited(status_count.select{|s| s['_id']['kind']=='email' && s['_id']['status'] == 'active'}.map{|s| s['value'].to_i}.sum),
-              notes: ActiveSupport::NumberHelper.number_to_delimited(status_count.select{|s| s['_id']['kind']=='normal' && s['_id']['status'] == 'active'}.map{|s| s['value'].to_i}.sum),
-              tasks: ActiveSupport::NumberHelper.number_to_delimited(status_count.select{|s| s['_id']['kind']=='task' && s['_id']['status'] == 'active'}.map{|s| s['value'].to_i}.sum),
-              open: ActiveSupport::NumberHelper.number_to_delimited(status_count.select{|s| s['_id']['status'] == 'active'}.map{|s| s['value'].to_i}.sum),
-              actioned: ActiveSupport::NumberHelper.number_to_delimited(status_count.select{|s| s['_id']['status'] == 'actioned'}.map{|s| s['value'].to_i}.sum),
-              closed: ActiveSupport::NumberHelper.number_to_delimited(status_count.select{|s| s['_id']['status'] == 'closed'}.map{|s| s['value'].to_i}.sum)
+              inbox: ticket_status_count(status_count, :email, :active),
+              notes: ticket_status_count(status_count, :normal, :active),
+              tasks: ticket_status_count(status_count, :task, :active),
+              open: ticket_status_count(status_count, nil, :active),
+              actioned: ticket_status_count(status_count, nil, :actioned),
+              closed: ticket_status_count(status_count, nil, :closed)
               },
             flags: flags,
             totalFlags:  flag_count.map{|a| a['value'].to_i}.sum,
@@ -278,6 +258,17 @@ module UniversalCrm
             results: results
           }
         end
+
+        private
+
+        def ticket_status_count(aggregate, kind=nil, status=nil)
+          ActiveSupport::NumberHelper.number_to_delimited(
+            aggregate.select{|s| 
+              (kind.present? && s['_id']['kind']==kind.to_s || kind.blank?) && s['_id']['status'] == status.to_s
+            }.map{|s| s['value'].to_i}.sum
+          )
+        end
+
 
       end
     end
