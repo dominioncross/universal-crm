@@ -218,8 +218,8 @@ module UniversalCrm
               return count;
             }
           }
-          status_count = @tickets.map_reduce(map, reduce).out(inline: true)
-          flag_count = @tickets.map_reduce(map_flags, reduce).out(inline: true)
+          status_count = @tickets.map_reduce(map, reduce).out(inline: 1)
+          flag_count = @tickets.map_reduce(map_flags, reduce).out(inline: 1)
           flags = {}
           flag_count.sort_by{|a| -a['value'].to_i}.each do |c|
             flags.merge!(c['_id'] => ActiveSupport::NumberHelper.number_to_delimited(c['value'].to_i))

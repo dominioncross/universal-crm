@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'haml'
-gem 'mongoid', '~>4.0.0'
+gem 'mongoid', '5.4.1'
 gem 'mongoid_search'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'

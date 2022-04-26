@@ -14,7 +14,7 @@ module UniversalCrm
         include Universal::Concerns::Polymorphic
         include Universal::Concerns::Commentable
         
-        store_in session: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_tasks'
+        store_in database: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_tasks'
 
         field :an, as: :assignee_name
         field :t, as: :title
