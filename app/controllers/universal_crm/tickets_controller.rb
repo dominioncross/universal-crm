@@ -66,7 +66,7 @@ module UniversalCrm
     end
     
     def show
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       if @ticket.nil?
         render json: {ticket: nil}
       else
@@ -130,7 +130,7 @@ module UniversalCrm
     end
     
     def update_status
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       if params[:status]=='closed'
         @ticket.close!(universal_user)
       elsif params[:status]=='actioned'
@@ -149,7 +149,7 @@ module UniversalCrm
     end
     
     def update_due_on
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       if @ticket
         @ticket.update(due_on: params[:due_on])
         @ticket.save_comment!("Updated due date: #{params[:due_on].to_date.strftime('%b %d, %Y')}", current_user, universal_scope)
@@ -160,7 +160,7 @@ module UniversalCrm
     end
     
     def flag
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       if params[:add] == 'true'
         @ticket.flag!(params[:flag], universal_user)
         @ticket.save_comment!("Added flag: '#{params[:flag]}'", current_user, universal_scope)
@@ -172,7 +172,7 @@ module UniversalCrm
     end
     
     def update_customer
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       old_customer_name = @ticket.subject.name
       customer = UniversalCrm::Customer.find(params[:customer_id])
       @ticket.update(subject: customer, from_email: customer.email)
@@ -183,7 +183,7 @@ module UniversalCrm
     def assign_user
       @user = Universal::Configuration.class_name_user.classify.constantize.find(params[:user_id])
       if !@user.nil?
-        @ticket = UniversalCrm::Ticket.find(params[:id])
+        @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
         @ticket.update(responsible: @user)
         @ticket.save_comment!("Ticket assigned to: #{@user.name}", universal_user, universal_scope)
         begin
@@ -196,14 +196,14 @@ module UniversalCrm
     end
     
     def editing
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       @ticket.being_edited_by!(universal_user)
       render json: {}
     end
     
     #forward to an external email address
     def forward
-      @ticket = UniversalCrm::Ticket.find(params[:id])
+      @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
       begin
         UniversalCrm::Mailer.forward_ticket(universal_crm_config, @ticket, params[:email].strip).deliver_now
       rescue

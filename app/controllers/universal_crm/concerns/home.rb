@@ -135,7 +135,7 @@ module UniversalCrm
               token = to[3, to.index('@')-3]
               if to[0,3] == 'tk-'
                 logger.warn "Direct to ticket"
-                ticket = UniversalCrm::Ticket.find_by(token: /^#{token}$/i)
+                ticket = UniversalCrm::Ticket.unscoped.find_by(token: /^#{token}$/i)
                 if !ticket.nil?
                   ticket_subject = ticket.subject
                   user = (ticket_subject.class.to_s == Universal::Configuration.class_name_user.to_s ? ticket_subject : nil)
