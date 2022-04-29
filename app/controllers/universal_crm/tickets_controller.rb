@@ -10,16 +10,33 @@ module UniversalCrm
       @tickets = UniversalCrm::Ticket.all
       @tickets = @tickets.scoped_to(universal_scope) if !universal_scope.nil?
       if !params[:q].blank? and params[:q].to_s != 'undefined'
-        conditions = []
-        params[:q].split(' ').each do |keyword|
-          conditions.push({'$or' => [
-            {title: /#{keyword}/i},
-            {number: /#{keyword}/i},
-            {html_body: /#{keyword}/i},
-            {tags: keyword}
-          ]})
+        if ENV['CRM_TICKET_SEARCH_INDEX'].present?
+          search = {
+                      '$search': {
+                        index: ENV['CRM_TICKET_SEARCH_INDEX'],
+                        text: {
+                          query: params[:q],
+                          path: { 'wildcard': '*' }
+                        }
+                      }
+                    }
+          limit = { '$limit': 100 }
+          project = { '$project': { _id: '$_id' } }
+
+          ticket_ids = UniversalCrm::Ticket.collection.aggregate([search, project, limit]).map {|doc| doc['_id'] }
+          @tickets = @tickets.in(id: ticket_ids)
+        else
+          conditions = []
+          params[:q].split(' ').each do |keyword|
+            conditions.push({'$or' => [
+              {title: /#{keyword}/i},
+              {number: /#{keyword}/i},
+              {html_body: /#{keyword}/i},
+              {tags: keyword}
+            ]})
+          end
+          @tickets = @tickets.where('$and' => conditions)
         end
-        @tickets = @tickets.where('$and' => conditions)
       else
         if !params[:subject_id].blank? and params[:subject_id].to_s!='undefined' and !params[:subject_type].blank? and params[:subject_type].to_s!='undefined'
           conditions = [{'$and' => [{subject_id: params[:subject_id], subject_type: params[:subject_type]}]}]
