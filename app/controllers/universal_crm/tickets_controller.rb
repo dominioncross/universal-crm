@@ -9,7 +9,7 @@ module UniversalCrm
       params[:page] = 1 if params[:page].blank?
       @tickets = UniversalCrm::Ticket.all
       @tickets = @tickets.scoped_to(universal_scope) if !universal_scope.nil?
-      if !params[:q].blank? and params[:q].to_s != 'undefined'
+      if !params[:q].blank? && params[:q].to_s != 'undefined'
         if ENV['CRM_TICKET_SEARCH_INDEX'].present?
           search = {
                       '$search': {
@@ -38,8 +38,8 @@ module UniversalCrm
           @tickets = @tickets.where('$and' => conditions)
         end
       else
-        if !params[:subject_id].blank? and params[:subject_id].to_s!='undefined' and !params[:subject_type].blank? and params[:subject_type].to_s!='undefined'
-          conditions = [{'$and' => [{subject_id: params[:subject_id], subject_type: params[:subject_type]}]}]
+        if !params[:subject_id].blank? && params[:subject_id].to_s!='undefined' && !params[:subject_type].blank? && params[:subject_type].to_s!='undefined'
+          conditions = [{'$and' => [{subject_id: BSON::ObjectId(params[:subject_id]), subject_type: params[:subject_type]}]}]
           if params[:subject_type]=='UniversalCrm::Company'
             company = UniversalCrm::Company.find(params[:subject_id])
             company.employees.each do |employee|
@@ -47,7 +47,7 @@ module UniversalCrm
             end
           end
           @tickets = @tickets.where('$or' => conditions)
-        elsif !params[:flag].blank? and params[:flag]!='null' and params[:flag]!='undefined'
+        elsif !params[:flag].blank? && params[:flag] != 'null' && params[:flag] != 'undefined'
           @tickets = @tickets.flagged_with(params[:flag])        
         elsif params[:status] == 'email'
           @tickets = @tickets.email.active
@@ -55,7 +55,7 @@ module UniversalCrm
           @tickets = @tickets.normal.active
         elsif params[:status] == 'task'
           @tickets = @tickets.task.active
-        elsif !params[:status].blank? and params[:status] != 'priority' and params[:status] != 'all' and params[:status] != 'null'
+        elsif !params[:status].blank? && params[:status] != 'priority' && params[:status] != 'all' && params[:status] != 'null'
           @tickets = @tickets.for_status(params[:status])
         elsif params[:status] == 'priority'
           @tickets = @tickets.active.priority
@@ -98,11 +98,11 @@ module UniversalCrm
     end
     
     def create
-      if !params[:subject_id].blank? and !params[:subject_type].blank?
+      if !params[:subject_id].blank? && !params[:subject_type].blank?
         subject = params[:subject_type].classify.constantize.find params[:subject_id]
         kind = (params[:kind].to_s=='note' ? 'normal' : params[:kind])
         sent_from_crm=true
-      elsif !params[:customer_name].blank? and !params[:customer_email].blank?
+      elsif !params[:customer_name].blank? && !params[:customer_email].blank?
         #find a customer by this email
         subject = UniversalCrm::Customer.find_or_create_by(scope: universal_scope, email: params[:customer_email])
         subject.assign_user_subject!(universal_scope)
@@ -111,7 +111,7 @@ module UniversalCrm
       end
       if !params[:title].blank?
         document=nil
-        if !params[:document_id].blank? and !params[:document_type].blank?
+        if !params[:document_id].blank? && !params[:document_type].blank?
           document = params[:document_type].classify.constantize.find params[:document_id]
         end
         ticket = subject.tickets.new kind: kind,
@@ -124,7 +124,7 @@ module UniversalCrm
                                         creator: universal_user,
                                         responsible_id: params[:responsible_id]
                                         
-        if !document.nil? and !UniversalCrm::Configuration.secondary_scope_class.blank?
+        if !document.nil? && !UniversalCrm::Configuration.secondary_scope_class.blank?
           ticket.secondary_scope = document.crm_secondary_scope
         end
                      
