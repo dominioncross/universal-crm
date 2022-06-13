@@ -4,7 +4,7 @@ module UniversalCrm
   class HomeController < ApplicationController
     include UniversalCrm::Concerns::Home
     
-    skip_before_filter :require_user, only: %w(inbound)
+    skip_before_action :require_user, only: %w(inbound)
     
   end
 end

@@ -2,14 +2,14 @@ require_dependency "universal_crm/application_controller"
 
 module UniversalCrm
   class ConfigController < ApplicationController
-    
+
     def show
       respond_to do |format|
         format.json{render json: universal_crm_config.to_json}
         format.html{}
       end
     end
-    
+
     def update
       params[:config][:functions] = [] if params[:config][:functions].blank?
       p = params.require(:config).permit(
@@ -33,11 +33,11 @@ module UniversalCrm
       )
       p[:ticket_flags] = p[:ticket_flags].to_s.gsub('\r','').split("\n").map{|p| {label: p.split('|')[0], color: p.split('|')[1]}}
       p[:inbound_email_addresses] = p[:inbound_email_addresses].downcase.gsub(' ','').split(',')
-      puts p
+      
       universal_crm_config.update(p)
       render json: universal_crm_config.to_json
     end
-    
+
     def set_password
       password = params[:password]
       hashed_password = Digest::SHA1.hexdigest(password)
@@ -45,12 +45,12 @@ module UniversalCrm
       universal_crm_config.reload
       render json: universal_crm_config.to_json
     end
-    
+
     def signin
       password = params[:password]
       hashed_password = Digest::SHA1.hexdigest(password)
       render json: {signedIn: (universal_crm_config.hashed_password == hashed_password)}
     end
-    
+
   end
 end

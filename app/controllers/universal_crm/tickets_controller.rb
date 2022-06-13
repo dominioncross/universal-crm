@@ -3,7 +3,7 @@ require_dependency "universal_crm/application_controller"
 module UniversalCrm
   class TicketsController < ApplicationController
 
-    before_filter :remove_tickets_viewing!, only: %w(index)
+    before_action :remove_tickets_viewing!, only: %w(index)
     
     def index
       params[:page] = 1 if params[:page].blank?
