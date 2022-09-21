@@ -2,7 +2,7 @@ require_dependency "universal/application_controller"
 
 module Universal
   class CommentsController < ::UniversalCrm::ApplicationController
-    before_filter :find_model
+    before_action :find_model
 
     def index
       @model = find_model

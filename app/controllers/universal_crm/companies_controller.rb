@@ -3,7 +3,7 @@ require_dependency "universal_crm/application_controller"
 module UniversalCrm
   class CompaniesController < ApplicationController
     
-    before_filter :find_company, only: %w(show update update_status add_employee)
+    before_action :find_company, only: %w(show update update_status add_employee)
     
     def recent
       @companies = UniversalCrm::Company.order_by(created_at: :desc).limit(8)

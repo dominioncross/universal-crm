@@ -2,7 +2,7 @@ require_dependency "universal_crm/application_controller"
 
 module UniversalCrm
   class CustomersController < ApplicationController
-    before_filter :find_customer, only: %w(show update update_status)
+    before_action :find_customer, only: %w(show update update_status)
     
     def index
       params[:page] = 1 if params[:page].blank?
