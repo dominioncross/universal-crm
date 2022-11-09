@@ -9,7 +9,7 @@ module UniversalCrm
         include Universal::Concerns::Tokened
         include Universal::Concerns::Functional
         
-        store_in database: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_configs'
+        store_in collection: 'crm_configs'
 
         field :tf, as: :ticket_flags, type: Array, default: [{label: 'priority', color: 'e25d5d'}, {label: 'general', color: '27b6af'}]
         field :system_name

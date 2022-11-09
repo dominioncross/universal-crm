@@ -18,7 +18,7 @@ module UniversalCrm
         include Universal::Concerns::Tokened
         include Universal::Concerns::HasAttachments
 
-        store_in database: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_tickets'
+        store_in collection: 'crm_tickets'
 
         field :t, as: :title
         field :c, as: :content

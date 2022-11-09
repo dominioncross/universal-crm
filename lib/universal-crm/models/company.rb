@@ -19,7 +19,7 @@ module UniversalCrm
         include Universal::Concerns::HasAttachments
         include Universal::Concerns::Addressed
         
-        store_in database: UniversalCrm::Configuration.mongoid_session_name, collection: 'crm_companies'
+        store_in collection: 'crm_companies'
 
         field :n, as: :name
         field :e, as: :email
