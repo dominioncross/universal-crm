@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rails', '5.2.8'
+gem 'rails', '7.0.6'
 gem 'mongo', '2.17.1'
-gem 'mongoid', '7.0.5'
+gem 'mongoid', '7.5.1'
 gem 'mongoid_auto_increment', '0.1.5'
 gem 'bson', '4.15.0'
 gem 'mongoid_search'

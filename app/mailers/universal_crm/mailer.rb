@@ -1,6 +1,6 @@
 module UniversalCrm
   class Mailer < ActionMailer::Base
-    include UniversalCrm::MailConcern
+    include UniversalCrm::Concerns::MailConcern
   
     def new_ticket(config, customer, ticket, sent_from_crm=true)
       if !config.transaction_email_address.blank?
