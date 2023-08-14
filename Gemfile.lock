@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/dominioncross/universal
-  revision: da79faa618e302d23f9aa7e77b6a04858a8b40be
-  branch: rails5
+  revision: 51e62d63cd4f71fef4ce6b27fe3963966b78c270
+  tag: 1.0.0
   specs:
     universal (0.0.5)
       mongoid
@@ -19,7 +19,7 @@ GIT
 PATH
   remote: .
   specs:
-    universal-crm (0.0.3)
+    universal-crm (1.0.0)
       bootstrap-sass
       carrierwave
       carrierwave-mongoid
@@ -142,7 +142,7 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    haml (6.1.1)
+    haml (6.1.2)
       temple (>= 0.8.2)
       thor
       tilt
@@ -171,7 +171,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_magick (4.12.0)
-    mini_mime (1.1.2)
+    mini_mime (1.1.5)
     mini_portile2 (2.8.4)
     minitest (5.19.0)
     mongo (2.17.1)
@@ -197,7 +197,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.3)
+    nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     public_suffix (5.0.3)

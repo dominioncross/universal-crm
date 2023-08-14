@@ -22,4 +22,4 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 
-gem 'universal', git: 'https://github.com/dominioncross/universal', branch: 'rails5'
+gem 'universal', git: 'https://github.com/dominioncross/universal', tag: '1.0.0'
