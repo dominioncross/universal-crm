@@ -23,9 +23,9 @@ module UniversalCrm
         field :nrh, as: :new_reply_header
         field :ef, as: :email_footer
         field :gak, as: :google_api_key
-        field :cs, as: :companies, type: Boolean, default: false
-        field :ecs, as: :edit_companies, type: Boolean, default: false
-        field :ts, as: :tasks, type: Boolean, default: false
+        field :cs, as: :companies, type: Mongoid::Boolean, default: false
+        field :ecs, as: :edit_companies, type: Mongoid::Boolean, default: false
+        field :ts, as: :tasks, type: Mongoid::Boolean, default: false
         field :te, as: :test_email
         field :dcs, as: :default_customer_status, type: :string, default: :draft
         
