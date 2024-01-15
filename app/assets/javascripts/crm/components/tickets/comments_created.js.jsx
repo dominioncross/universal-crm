@@ -2,7 +2,7 @@ var TicketCommentsCreated = createReactClass({
   render: function(){
     return (
       <div className='pull-right'>
-        {this.commentCount()} {this.props.ticket.updated_at}
+        {this.props.ticket.created_at} &bull; {this.commentCount()} &bull; Updated {this.props.ticket.updated_at}
       </div>
     ) 
   },
