@@ -40,20 +40,25 @@ module UniversalCrm
         def inbound
           logger.warn "#### Inbound CRM mail received from #{params['From']}"
           # logger.info params
-          if request.post? and !params['From'].blank? and !params['ToFull'].blank?
+          if request.post? && !params['From'].blank? && !params['ToFull'].blank?
+            # Save the inbound request for later...
+            inbound_message = UniversalCrm::InboundMessage.create(params: (params.class == Hash ? params : params.to_unsafe_h))
+
             #find the email address we're sending to
             to = params['ToFull'][0]['Email'].downcase if !params['ToFull'].blank? and !params['ToFull'][0].blank? and !params['ToFull'][0]['Email'].blank? and params['ToFull'][0]['Email'].include?('@')
             to_name = params['ToFull'][0]['Name'].downcase if !params['ToFull'].blank? and !params['ToFull'][0].blank? and !params['ToFull'][0]['Name'].blank?
             bcc = params['BccFull'][0]['Email'].downcase if !params['BccFull'].blank? and !params['BccFull'][0].blank? and !params['BccFull'][0]['Email'].blank? and params['BccFull'][0]['Email'].include?('@')
             from = params['From'].downcase
             from_name = params['FromName']
-            ticket=nil
+            ticket = nil
 
             #check if the BCC is for our inbound addresses:
             if !bcc.blank?
               #check if it was forwarded to the bcc address:
               possible_token = bcc.split('@')[0]
               if config = UniversalCrm::Config.find_by(token: /#{possible_token}/i)
+                inbound_message&.update(scope: config.scope)
+
                 #To = Owner, From = user, BCC'd/forwarded to CRM
                 ticket_subject = UniversalCrm::Customer.find_by(scope: config.scope, email: from)
                 ticket_subject ||= UniversalCrm::Company.find_by(scope: config.scope, email: from) #check if there's a company now
@@ -72,6 +77,8 @@ module UniversalCrm
                                                           creator: creator
                 end
               elsif config = UniversalCrm::Config.find_by(inbound_email_addresses: bcc)
+                inbound_message&.update(scope: config.scope)
+
                 #To = customer, From = user
                 ticket_subject = UniversalCrm::Customer.find_by(scope: config.scope, email: to)
                 ticket_subject ||= UniversalCrm::Company.find_by(scope: config.scope, email: to) #check if there's a company now
@@ -91,6 +98,8 @@ module UniversalCrm
               end
             elsif !to.blank? and config = UniversalCrm::Config.find_by(inbound_email_addresses: to) #SENT Directly to the CRM
               if !config.nil?
+                inbound_message&.update(scope: config.scope)
+
                 creator = Universal::Configuration.class_name_user.classify.constantize.find_by(email: from)
                 #find who it was originally from:
                 forwarded_from = nil
@@ -137,6 +146,8 @@ module UniversalCrm
                 logger.warn "Direct to ticket"
                 ticket = UniversalCrm::Ticket.unscoped.find_by(token: /^#{token}$/i)
                 if !ticket.nil?
+                  inbound_message&.update(scope: ticket.scope)
+
                   ticket_subject = ticket.subject
                   user = (ticket_subject.class.to_s == Universal::Configuration.class_name_user.to_s ? ticket_subject : nil)
                   ticket.open!(user)
@@ -177,8 +188,11 @@ module UniversalCrm
                 end
               end
             end
+
+            inbound_message&.success!
             render json: {}
           else
+            inbound_message&.fail!
             render json: {status: 200, message: "From/To not sent"}
           end
         end
