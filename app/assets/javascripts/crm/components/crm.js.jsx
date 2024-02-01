@@ -108,6 +108,8 @@ var CRM = createReactClass({
     this.setGlobalState('searchWord', '');
     this.setGlobalState('pageIcon', null);
     this.setGlobalState('pageTitle', null);
+    this.setGlobalState('dateStart', '');
+    this.setGlobalState('dateEnd', '');
     this.handlePageHistory('Home', '/crm');
     this.setState({mainComponent: <TicketList _goTicket={this._goTicket} gs={this.state.gs} sgs={this.setGlobalState} status={status} flag={flag} _goCustomer={this._goCustomer} _goCompany={this._goCompany} />});
   },
