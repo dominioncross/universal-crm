@@ -36,7 +36,17 @@ var TicketList = createReactClass({
       var _this = this;
       $.ajax({
         method: 'GET',
-        url: `/crm/tickets?q=${keyword}&status=${this.props.gs.ticketStatus}&subject_id=${this.props.subjectId}&subject_type=${this.props.subjectType}&flag=${this.props.gs.ticketFlag}&page=${page}`,
+        url: "/crm/tickets",
+        data: {
+          q: keyword,
+          status: this.props.gs.ticketStatus,
+          date_start: this.props.gs.dateStart,
+          date_end: this.props.gs.dateEnd,
+          subject_id: this.props.subjectId,
+          subject_type: this.props.subjectType,
+          flag: this.props.gs.ticketFlag,
+          page
+        },
         success: function(data){
           _this.setState({
             loading: false,

@@ -6,6 +6,8 @@ module UniversalCrm
 
     def index
       params[:page] = 1 if params[:page].blank?
+      per_page = Kaminari.config.default_per_page
+
       @tickets = UniversalCrm::Ticket.all
       @tickets = @tickets.scoped_to(universal_scope) unless universal_scope.nil?
       if !params[:q].blank? && params[:q].to_s != 'undefined'
@@ -26,12 +28,22 @@ module UniversalCrm
               index: ENV['CRM_TICKET_SEARCH_INDEX'],
               compound: { filter: compound }
             } },
+            if params[:date_start].present? && params[:date_end].present?
+              { '$match': {
+                '$and': [
+                  { updated_at: { '$gte': params[:date_start].to_date } },
+                  { updated_at: { '$lte': params[:date_end].to_date } }
+                ]
+              } }
+            end,
             { '$sort': { created_at: -1 } },
-            { '$limit': 100 },
+            { '$skip': (params[:page].to_i - 1) * per_page },
+            { '$limit': per_page },
             { '$project': { _id: '$_id' } }
           ]
+          Rails.logger.debug pipeline.compact.flatten.to_json
 
-          ticket_ids = UniversalCrm::Ticket.collection.aggregate(pipeline.flatten).map { |doc| doc['_id'] }
+          ticket_ids = UniversalCrm::Ticket.collection.aggregate(pipeline.flatten.compact).map { |doc| doc['_id'] }
           @tickets = @tickets.in(id: ticket_ids)
         else
           conditions = []
@@ -73,13 +85,16 @@ module UniversalCrm
         end
         @tickets = @tickets.email if params[:kind] == 'email'
       end
-      @tickets = @tickets.page(params[:page])
+      if params[:date_start].present? && params[:date_end].present?
+        @tickets = @tickets.between(updated_at: [params[:date_start].to_date, params[:date_end].to_date])
+      end
+      @tickets = @tickets.page(params[:page]).per(per_page)
       render json: {
         pagination: {
           total_count: @tickets.total_count,
           page_count: @tickets.total_pages,
           current_page: params[:page].to_i,
-          per_page: 20
+          per_page: per_page
         },
         tickets: @tickets.map { |t| t.to_json }
       }
