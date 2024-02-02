@@ -49,7 +49,7 @@ var QuickSearch = createReactClass({
         <form onSubmit={this.handleSearch}>
           <input type="text" placeholder='Quick Search...' className="search" onChange={this.handleSearchWord} ref="search_input" />
           <button type="submit" className="btn btn-sm btn-search"><i className={this.icon()}></i></button>
-      <i className={`fa fa-calendar ${this.state.dateEnd && this.state.dateStart ? 'text-success' : ''}`} style={{ position: 'absolute', marginTop: 23, marginLeft: 10, cursor: 'pointer' }} onClick={this.handleOnClose} />
+          <i className={`fa fa-calendar ${this.state.dateEnd && this.state.dateStart ? 'text-success' : ''}`} style={{ position: 'absolute', marginTop: 23, marginLeft: 10, cursor: 'pointer' }} onClick={this.handleOnClose} />
           <div className="well well-sm" style={{background: '#FFF', position: 'absolute', marginTop: -30, left: 230, display: this.state.displayDates ? '' : 'none'}}>
             <div className="form-group" style={{marginBottom: 5}}>
               <label>From:

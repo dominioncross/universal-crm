@@ -24,10 +24,13 @@ module UniversalCrm
                           })
           end
           pipeline = [
-            { '$search': {
-              index: ENV['CRM_TICKET_SEARCH_INDEX'],
-              compound: { filter: compound }
-            } },
+            if compound.any?
+              { '$search': {
+                index: ENV['CRM_TICKET_SEARCH_INDEX'],
+                compound: { filter: compound }
+              } }
+            end,
+            { '$match': { scope_id: universal_scope.id } },
             if params[:date_start].present? && params[:date_end].present?
               { '$match': {
                 '$and': [
