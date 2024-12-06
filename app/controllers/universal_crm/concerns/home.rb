@@ -38,7 +38,7 @@ module UniversalCrm
 
         #we don't have universal scope here, so need to establish it from the to address or sender
         def inbound
-          logger.warn "#### Inbound CRM mail received from #{params['From']}"
+          # logger.warn "#### Inbound CRM mail received from #{params['From']}"
           # logger.info params
           if request.post? && !params['From'].blank? && !params['ToFull'].blank?
             # Save the inbound request for later...
@@ -143,7 +143,7 @@ module UniversalCrm
               end
               token = to[3, to.index('@')-3]
               if to[0,3] == 'tk-'
-                logger.warn "Direct to ticket"
+                # logger.warn "Direct to ticket"
                 ticket = UniversalCrm::Ticket.unscoped.find_by(token: /^#{token}$/i)
                 if !ticket.nil?
                   inbound_message&.update(scope: ticket.scope)
@@ -163,11 +163,11 @@ module UniversalCrm
                                           subject_kind: ticket.kind,
                                           subject: ticket_subject
 
-                  logger.warn comment.errors.to_json
+                  # logger.warn comment.errors.to_json
                 end
               end
             else
-              logger.warn "To not received"
+              # logger.warn "To not received"
             end
             #check for attachments
             if !ticket.nil? and !params['Attachments'].blank? and !params['Attachments'].empty?
@@ -181,7 +181,7 @@ module UniversalCrm
                   path = "#{Rails.root}/tmp/#{Time.now.to_i}-#{filename}"
                   File.open(path, 'wb'){|f| f.write(decoded)}
                   att = ticket.attachments.create file: File.open(path), name: filename
-                  logger.warn att.errors.to_json
+                  # logger.warn att.errors.to_json
                   File.delete(path)
                 rescue => error
                   puts "Attachment error: #{error.to_s}"
