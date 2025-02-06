@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'geocoder'
+
 module UniversalCrm
   module Models
     module Company
@@ -18,74 +22,71 @@ module UniversalCrm
         include Universal::Concerns::Tokened
         include Universal::Concerns::HasAttachments
         include Universal::Concerns::Addressed
-        
+
         store_in collection: 'crm_companies'
 
         field :n, as: :name
         field :e, as: :email
         field :p, as: :phone
-        
+
         has_many :tickets, as: :subject, class_name: 'UniversalCrm::Ticket'
-        
+
         search_in :n, :e
 
-        statuses %w(active draft blocked), default: :active
-        
+        statuses %w[active draft blocked], default: :active
+
         validates :name, :email, presence: true
-        validates_uniqueness_of :email, scope: [:scope_type, :scope_id]
-#         numbered_prefix 'CP'
-        
+        validates_uniqueness_of :email, scope: %i[scope_type scope_id]
+        #         numbered_prefix 'CP'
+
         # default_scope ->(){order_by(created_at: :desc)}
-        
+
         def inbound_email_address(config)
-          "cp-#{self.token}@#{config.inbound_domain}"
+          "cp-#{token}@#{config.inbound_domain}"
         end
-        
+
         def to_json(config)
-          return {
-            id: self.id.to_s,
-            number: self.number.to_s,
-            status: self.status,
-            name: self.name,
-            email: self.email, 
-            phone: self.phone,
-            tags: self.tags,
-            ticket_count: self.tickets.count, 
-            token: self.token,
-            inbound_email_address: self.inbound_email_address(config),
-            closed_ticket_count: self.tickets.unscoped.closed.count,
-            employee_ids: self.employee_ids,
-            employees: self.employees_json,
-            address: self.address,
-            subject_type: self.subject_type,
-            subject_id: self.subject_id.to_s
-            }
+          {
+            id: id.to_s,
+            number: number.to_s,
+            status: status,
+            name: name,
+            email: email,
+            phone: phone,
+            tags: tags,
+            ticket_count: tickets.count,
+            token: token,
+            inbound_email_address: inbound_email_address(config),
+            closed_ticket_count: tickets.unscoped.closed.count,
+            employee_ids: employee_ids,
+            employees: employees_json,
+            address: address,
+            subject_type: subject_type,
+            subject_id: subject_id.to_s
+          }
         end
-        
+
         def employees_json
-          a=[]
-          self.employees.each do |e|
-            a.push({
+          employees.map do |e|
+            {
               id: e.id.to_s,
               name: e.name,
               email: e.email,
               type: e.class.to_s,
               open_ticket_count: e.tickets.active.count
-              })
+            }
           end
-          return a
         end
-        
+
         def block!(user)
-          self.comments.create content: 'Company blocked', author: user.name, when: Time.now.utc
-          self.blocked!
+          comments.create content: 'Company blocked', author: user.name, when: Time.now.utc
+          blocked!
         end
-        
+
         def unblock!(user)
-          self.comments.create content: 'Company unblocked', author: user.name, when: Time.now.utc
-          self.active!
+          comments.create content: 'Company unblocked', author: user.name, when: Time.now.utc
+          active!
         end
-        
       end
     end
   end

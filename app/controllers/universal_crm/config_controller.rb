@@ -1,12 +1,13 @@
-require_dependency "universal_crm/application_controller"
+# frozen_string_literal: true
+
+require_dependency 'universal_crm/application_controller'
 
 module UniversalCrm
   class ConfigController < ApplicationController
-
     def show
       respond_to do |format|
-        format.json{render json: universal_crm_config.to_json}
-        format.html{}
+        format.json { render json: universal_crm_config.to_json }
+        format.html {}
       end
     end
 
@@ -31,9 +32,11 @@ module UniversalCrm
         :default_customer_status,
         functions: []
       )
-      p[:ticket_flags] = p[:ticket_flags].to_s.gsub('\r','').split("\n").map{|p| {label: p.split('|')[0], color: p.split('|')[1]}}
-      p[:inbound_email_addresses] = p[:inbound_email_addresses].downcase.gsub(' ','').split(',')
-      
+      p[:ticket_flags] = p[:ticket_flags].to_s.gsub('\r', '').split("\n").map do |p|
+        { label: p.split('|')[0], color: p.split('|')[1] }
+      end
+      p[:inbound_email_addresses] = p[:inbound_email_addresses].downcase.gsub(' ', '').split(',')
+
       universal_crm_config.update(p)
       render json: universal_crm_config.to_json
     end
@@ -49,8 +52,7 @@ module UniversalCrm
     def signin
       password = params[:password]
       hashed_password = Digest::SHA1.hexdigest(password)
-      render json: {signedIn: (universal_crm_config.hashed_password == hashed_password)}
+      render json: { signedIn: (universal_crm_config.hashed_password == hashed_password) }
     end
-
   end
 end

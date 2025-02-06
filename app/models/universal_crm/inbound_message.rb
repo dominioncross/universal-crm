@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UniversalCrm
   class InboundMessage
     include Mongoid::Document

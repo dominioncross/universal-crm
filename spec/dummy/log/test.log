@@ -1,0 +1,292 @@
+Creating scope :system which conflicts with Universal::Comment.system. Calls to `Mongoid::Criteria#system` will delegate to `Mongoid::Criteria#system` for criteria with klass Universal::Comment and will ignore the declared scope.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:202 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x11220 type=uuid data=0x1084e4786fb646bf...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :public which conflicts with UniversalLog::Channel.public. Calls to `Mongoid::Criteria#public` will delegate to `Mongoid::Criteria#public` for criteria with klass UniversalLog::Channel and will ignore the declared scope.
+Creating scope :private which conflicts with UniversalLog::Channel.private. Calls to `Mongoid::Criteria#private` will delegate to `Mongoid::Criteria#private` for criteria with klass UniversalLog::Channel and will ignore the declared scope.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:202 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x11220 type=uuid data=0x1084e4786fb646bf...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:205 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14500 type=uuid data=0x971cf75f0511465e...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:205 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14500 type=uuid data=0x971cf75f0511465e...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:208 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14540 type=uuid data=0xa075851f1f5c4c3f...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:208 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14540 type=uuid data=0xa075851f1f5c4c3f...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.001s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:211 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14560 type=uuid data=0x4fe2e74973d04e50...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:211 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14560 type=uuid data=0x4fe2e74973d04e50...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.001s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:217 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x3a5961aadc1b4e36...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:217 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x3a5961aadc1b4e36...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:217 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x3a5961aadc1b4e36...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:220 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x971635412ce64553...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:220 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x971635412ce64553...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:220 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x971635412ce64553...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:223 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x70976b5f58a24328...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:223 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x70976b5f58a24328...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:223 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x70976b5f58a24328...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:226 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x8e00d1c9526940f5...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:226 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x8e00d1c9526940f5...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:226 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x8e00d1c9526940f5...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:229 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x26204e896a4448c1...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:229 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x26204e896a4448c1...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:229 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0x26204e896a4448c1...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:232 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0xc59237f6b16f4199...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:232 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0xc59237f6b16f4199...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:232 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x15380 type=uuid data=0xc59237f6b16f4199...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:235 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xc7e096d6f46748fe...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:235 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xc7e096d6f46748fe...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:235 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xc7e096d6f46748fe...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:238 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0x762f225cbdca4d1d...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:238 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0x762f225cbdca4d1d...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:238 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0x762f225cbdca4d1d...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:241 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xfd13a11b56604615...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:241 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xfd13a11b56604615...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:241 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xfd13a11b56604615...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:244 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xd9695ad473564d0e...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:244 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xd9695ad473564d0e...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:244 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14580 type=uuid data=0xd9695ad473564d0e...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:247 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xb061a72502d941f6...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:247 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xb061a72502d941f6...>}}
+MONGODB | localhost:27017 req:7 | universal_test.listCollections | SUCCEEDED | 0.000s
+@@@@@@@@@@@@@@@@@@@@ generate new document number!
+The criteria cache has been deprecated and will be removed in Mongoid 8. Please enable the Mongoid QueryCache to have caching functionality.
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:247 | universal_test.find | STARTED | {"find"=>"document_numbers", "filter"=>{"_kn"=>"UniversalCrm::Company", "p"=>"c", "s"=>""}, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xb061a72502d941f6...>}}
+MONGODB | localhost:27017 req:8 | universal_test.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 req:9 conn:1:1 sconn:247 | universal_test.insert | STARTED | {"insert"=>"document_numbers", "ordered"=>true, "documents"=>[{"_id"=>BSON::ObjectId('67a4182628b80c540409ac46'), "_kn"=>"UniversalCrm::Company", "p"=>"c", "n"=>2, "s"=>""}], "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data...
+MONGODB | localhost:27017 req:9 | universal_test.insert | SUCCEEDED | 0.056s
+next_num
+MONGODB | localhost:27017 req:10 conn:1:1 sconn:247 | universal_test.find | STARTED | {"find"=>"crm_companies", "filter"=>{"scope_type"=>nil, "scope_id"=>nil, "e"=>nil}, "limit"=>1, "projection"=>{"_id"=>1}, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xb061a72502d941f6...>}}
+MONGODB | localhost:27017 req:10 | universal_test.find | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:11 conn:1:1 sconn:247 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xb061a72502d941f6...>}}
+MONGODB | localhost:27017 req:11 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:12 conn:1:1 sconn:247 | universal_test.delete | STARTED | {"delete"=>"document_numbers", "ordered"=>true, "deletes"=>[{"q"=>{}, "limit"=>0}], "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xb061a72502d941f6...>}}
+MONGODB | localhost:27017 req:12 | universal_test.delete | SUCCEEDED | 0.004s
+Overwriting existing field _keywords in class UniversalCrm::Company.
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | There was a change in the members of the 'Unknown' topology.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Waiting for up to 30.00 seconds for servers to be scanned: #<Cluster topology=Unknown[localhost:27017] servers=[#<Server address=localhost:27017 UNKNOWN>]>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 req:6 conn:1:1 sconn:250 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:6 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:7 conn:1:1 sconn:250 | universal_test.delete | STARTED | {"delete"=>"document_numbers", "ordered"=>true, "deletes"=>[{"q"=>{}, "limit"=>0}], "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:7 | universal_test.delete | SUCCEEDED | 0.000s
+Creating scope :system. Overwriting existing method Universal::Comment.system.
+Overwriting existing field _keywords in class UniversalCrm::Customer.
+Creating scope :fail. Overwriting existing method UniversalCrm::InboundMessage.fail.
+Overwriting existing field _keywords in class UniversalCrm::Task.
+Overwriting existing field _keywords in class UniversalCrm::Ticket.
+MONGODB | localhost:27017 req:8 conn:1:1 sconn:250 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:8 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:9 conn:1:1 sconn:250 | universal_test.delete | STARTED | {"delete"=>"document_numbers", "ordered"=>true, "deletes"=>[{"q"=>{}, "limit"=>0}], "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:9 | universal_test.delete | SUCCEEDED | 0.000s
+@@@@@@@@@@@@@@@@@@@@ generate new document number!
+The criteria cache has been deprecated and will be removed in Mongoid 8. Please enable the Mongoid QueryCache to have caching functionality.
+MONGODB | localhost:27017 req:10 conn:1:1 sconn:250 | universal_test.find | STARTED | {"find"=>"document_numbers", "filter"=>{"_kn"=>"UniversalCrm::Company", "p"=>"c", "s"=>""}, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:10 | universal_test.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 req:11 conn:1:1 sconn:250 | universal_test.insert | STARTED | {"insert"=>"document_numbers", "ordered"=>true, "documents"=>[{"_id"=>BSON::ObjectId('67a4184328b80c54f2c1c67b'), "_kn"=>"UniversalCrm::Company", "p"=>"c", "n"=>2, "s"=>""}], "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data...
+MONGODB | localhost:27017 req:11 | universal_test.insert | SUCCEEDED | 0.000s
+next_num
+MONGODB | localhost:27017 req:12 conn:1:1 sconn:250 | universal_test.find | STARTED | {"find"=>"crm_companies", "filter"=>{"scope_type"=>nil, "scope_id"=>nil, "e"=>"some@email.com"}, "limit"=>1, "projection"=>{"_id"=>1}, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:12 | universal_test.find | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:13 conn:1:1 sconn:250 | universal_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "nameOnly"=>true, "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:13 | universal_test.listCollections | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 req:14 conn:1:1 sconn:250 | universal_test.delete | STARTED | {"delete"=>"document_numbers", "ordered"=>true, "deletes"=>[{"q"=>{}, "limit"=>0}], "$db"=>"universal_test", "lsid"=>{"id"=><BSON::Binary:0x14380 type=uuid data=0xccf97051cce84de9...>}}
+MONGODB | localhost:27017 req:14 | universal_test.delete | SUCCEEDED | 0.000s

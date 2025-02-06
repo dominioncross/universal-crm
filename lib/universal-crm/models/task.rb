@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UniversalCrm
   module Models
     module Task
@@ -13,7 +15,7 @@ module UniversalCrm
         include Universal::Concerns::Scoped
         include Universal::Concerns::Polymorphic
         include Universal::Concerns::Commentable
-        
+
         store_in collection: 'crm_tasks'
 
         field :an, as: :assignee_name
@@ -21,17 +23,16 @@ module UniversalCrm
         field :n, as: :notes
         field :ca, as: :completed_at, type: DateTime
         field :d, as: :due_on, type: Date
-        
-        statuses %w(active complete)
-        
+
+        statuses %w[active complete]
+
         validates_presence_of :title, :subject
 
         search_in :title
-        
+
         def overdue?
-          !self.due_on.blank? and self.due_on < Time.zone.now
+          due_on.present? and due_on < Time.zone.now
         end
-        
       end
     end
   end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 UniversalCrm::Engine.routes.draw do
   root to: 'home#index'
-  
+
   get '/logout', to: 'user_sessions#logout', as: :logout
   get '/customer/:customer_id', to: 'home#index'
   get '/company/:company_id', to: 'home#index'
@@ -18,9 +20,9 @@ UniversalCrm::Engine.routes.draw do
   get '/dashboard', to: 'home#dashboard'
   get '/newsfeed', to: 'home#newsfeed'
   get '/search', to: 'home#search'
-  
+
   resource :config, controller: :config
-  
+
   resources :attachments do
     member do
       get :shorten_url
@@ -36,18 +38,24 @@ UniversalCrm::Engine.routes.draw do
   end
   resources :companies do
     collection do
-      get :autocomplete, :recent
+      get :autocomplete
+      get :recent
     end
     member do
-      patch :add_employee, :update_status
+      patch :add_employee
+      patch :update_status
     end
   end
   resources :tickets do
     member do
-      patch :update_status, :flag, :update_customer, :assign_user, :editing, :update_due_on
+      patch :update_status
+      patch :flag
+      patch :update_customer
+      patch :assign_user
+      patch :editing
+      patch :update_due_on
       post :forward
     end
   end
   resources :comments
-  
 end

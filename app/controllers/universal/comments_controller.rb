@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_dependency 'universal/application_controller'
 
 module Universal
@@ -17,7 +19,7 @@ module Universal
       @comment.when = Time.now.utc
       @comment.user = current_user
       if @comment.save
-        if @model.class == UniversalCrm::Ticket
+        if @model.instance_of?(UniversalCrm::Ticket)
           if @comment.email?
             UniversalCrm::Mailer.ticket_reply(universal_crm_config, @model.subject, @model, @comment).deliver_now
           end
@@ -28,15 +30,15 @@ module Universal
         logger.debug @comment.errors.to_json
       end
       comments = load_comments
-      render json: comments.map { |c| c.to_json }
+      render json: comments.map(&:to_json)
     end
 
     def recent
       @comments = Universal::Comment.unscoped.order_by(created_at: :desc)
       @comments = @comments.scoped_to(universal_scope) unless universal_scope.nil?
-      @comments = @comments.where(subject_type: params[:subject_type]) unless params[:subject_type].blank?
-      @comments = @comments.where(user_id: params[:user_id]) unless params[:user_id].blank?
-      @comments = @comments.where(subject_kind: params[:subject_kind]) unless params[:subject_kind].blank?
+      @comments = @comments.where(subject_type: params[:subject_type]) if params[:subject_type].present?
+      @comments = @comments.where(user_id: params[:user_id]) if params[:user_id].present?
+      @comments = @comments.where(subject_kind: params[:subject_kind]) if params[:subject_kind].present?
       @comments = @comments.page(params[:page])
       render json: {
         pagination: {
@@ -45,7 +47,7 @@ module Universal
           current_page: params[:page].to_i,
           per_page: 20
         },
-        comments: @comments.map { |c| c.to_json }
+        comments: @comments.map(&:to_json)
       }
     end
 
