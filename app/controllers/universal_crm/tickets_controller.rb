@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_dependency 'universal_crm/application_controller'
 
 module UniversalCrm
@@ -10,23 +12,23 @@ module UniversalCrm
 
       @tickets = UniversalCrm::Ticket.all
       @tickets = @tickets.scoped_to(universal_scope) unless universal_scope.nil?
-      if !params[:q].blank? && params[:q].to_s != 'undefined'
+      if params[:q].present? && params[:q].to_s != 'undefined'
         if ENV['CRM_TICKET_SEARCH_INDEX'].present?
           compound = []
-          params[:q].split(' ').each do |k|
-            next unless k.present?
+          params[:q].split.each do |k|
+            next if k.blank?
 
             compound.push({
-                            "text": {
-                              "query": k,
-                              "path": %w[_num c t tags]
+                            text: {
+                              query: k,
+                              path: %w[_num c t tags]
                             }
                           })
           end
           pipeline = [
             if compound.any?
               { '$search': {
-                index: ENV['CRM_TICKET_SEARCH_INDEX'],
+                index: ENV.fetch('CRM_TICKET_SEARCH_INDEX', nil),
                 compound: { filter: compound }
               } }
             end,
@@ -46,22 +48,21 @@ module UniversalCrm
           ]
           Rails.logger.debug pipeline.compact.flatten.to_json
 
-          ticket_ids = UniversalCrm::Ticket.collection.aggregate(pipeline.flatten.compact).map { |doc| doc['_id'] }
+          ticket_ids = UniversalCrm::Ticket.collection.aggregate(pipeline.flatten.compact).pluck('_id')
           @tickets = @tickets.in(id: ticket_ids)
         else
-          conditions = []
-          params[:q].split(' ').each do |keyword|
-            conditions.push({ '$or' => [
-                              { title: /#{keyword}/i },
-                              { number: /#{keyword}/i },
-                              { html_body: /#{keyword}/i },
-                              { tags: keyword }
-                            ] })
+          conditions = params[:q].split.map do |keyword|
+            { '$or' => [
+              { title: /#{keyword}/i },
+              { number: /#{keyword}/i },
+              { html_body: /#{keyword}/i },
+              { tags: keyword }
+            ] }
           end
           @tickets = @tickets.where('$and' => conditions)
         end
       else
-        if !params[:subject_id].blank? && params[:subject_id].to_s != 'undefined' && !params[:subject_type].blank? && params[:subject_type].to_s != 'undefined'
+        if params[:subject_id].present? && params[:subject_id].to_s != 'undefined' && params[:subject_type].present? && params[:subject_type].to_s != 'undefined'
           conditions = [{ '$and' => [{ subject_id: BSON::ObjectId(params[:subject_id]),
                                        subject_type: params[:subject_type] }] }]
           if params[:subject_type] == 'UniversalCrm::Company'
@@ -71,7 +72,7 @@ module UniversalCrm
             end
           end
           @tickets = @tickets.where('$or' => conditions)
-        elsif !params[:flag].blank? && params[:flag] != 'null' && params[:flag] != 'undefined'
+        elsif params[:flag].present? && params[:flag] != 'null' && params[:flag] != 'undefined'
           @tickets = @tickets.flagged_with(params[:flag])
         elsif params[:status] == 'email'
           @tickets = @tickets.email.active
@@ -79,7 +80,7 @@ module UniversalCrm
           @tickets = @tickets.normal.active
         elsif params[:status] == 'task'
           @tickets = @tickets.task.active
-        elsif !params[:status].blank? && params[:status] != 'priority' && params[:status] != 'all' && params[:status] != 'null'
+        elsif params[:status].present? && params[:status] != 'priority' && params[:status] != 'all' && params[:status] != 'null'
           @tickets = @tickets.for_status(params[:status])
         elsif params[:status] == 'priority'
           @tickets = @tickets.active.priority
@@ -99,11 +100,9 @@ module UniversalCrm
           current_page: params[:page].to_i,
           per_page: per_page
         },
-        tickets: @tickets.map { |t| t.to_json }
+        tickets: @tickets.map(&:to_json)
       }
     end
-
-    def new; end
 
     def show
       @ticket = UniversalCrm::Ticket.unscoped.find(params[:id])
@@ -120,21 +119,25 @@ module UniversalCrm
       end
     end
 
+    def new; end
+
     def create
-      if !params[:subject_id].blank? && !params[:subject_type].blank?
+      if params[:subject_id].present? && params[:subject_type].present?
         subject = params[:subject_type].classify.constantize.find params[:subject_id]
         kind = (params[:kind].to_s == 'note' ? 'normal' : params[:kind])
         sent_from_crm = true
-      elsif !params[:customer_name].blank? && !params[:customer_email].blank?
+      elsif params[:customer_name].present? && params[:customer_email].present?
         # find a customer by this email
         subject = UniversalCrm::Customer.find_or_create_by(scope: universal_scope, email: params[:customer_email])
         subject.assign_user_subject!(universal_scope)
         kind = :email
         sent_from_crm = false
       end
-      if !params[:title].blank?
+      if params[:title].blank?
+        render json: {}
+      else
         document = nil
-        if !params[:document_id].blank? && !params[:document_type].blank?
+        if params[:document_id].present? && params[:document_type].present?
           document = params[:document_type].classify.constantize.find params[:document_id]
         end
         ticket = subject.tickets.new kind: kind,
@@ -147,12 +150,12 @@ module UniversalCrm
                                      creator: universal_user,
                                      responsible_id: params[:responsible_id]
 
-        if !document.nil? && !UniversalCrm::Configuration.secondary_scope_class.blank?
+        if !document.nil? && UniversalCrm::Configuration.secondary_scope_class.present?
           ticket.secondary_scope = document.crm_secondary_scope
         end
 
         if ticket.save
-          unless params[:flag].blank?
+          if params[:flag].present?
             params[:flag].strip.gsub(' ', '').split(',').each do |_flag|
               ticket.flag!(params[:flag], universal_user)
               ticket.save_comment!("Added flag: '#{params[:flag]}'", current_user, universal_scope)
@@ -164,8 +167,6 @@ module UniversalCrm
           end
         end
         render json: { ticket: ticket.to_json }
-      else
-        render json: {}
       end
     end
 
