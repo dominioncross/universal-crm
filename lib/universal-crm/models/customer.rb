@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UniversalCrm
   module Models
     module Customer
@@ -17,7 +19,7 @@ module UniversalCrm
         include Universal::Concerns::Tokened
         include Universal::Concerns::HasAttachments
         include Universal::Concerns::Employee
-        
+
         store_in collection: 'crm_customers'
 
         field :n, as: :name
@@ -26,71 +28,68 @@ module UniversalCrm
         field :ph, as: :phone_home
         field :pw, as: :phone_work
         field :pm, as: :phone_mobile
-        
-        has_many :tickets, as: :subject, class_name: 'UniversalCrm::Ticket'
-        employed_by [{companies: 'UniversalCrm::Company'}]
 
-        statuses %w(active draft blocked), default: :active
-        
+        has_many :tickets, as: :subject, class_name: 'UniversalCrm::Ticket'
+        employed_by [{ companies: 'UniversalCrm::Company' }]
+
+        statuses %w[active draft blocked], default: :active
+
         search_in :n, :e
-        
+
         validates :email, presence: true
-        validates_uniqueness_of :email, scope: [:scope_type, :scope_id]
+        validates_uniqueness_of :email, scope: %i[scope_type scope_id]
         # default_scope ->(){order_by(created_at: :desc)}
-        
+
         def inbound_email_address(config)
-          "cr-#{self.token}@#{config.inbound_domain}"
+          "cr-#{token}@#{config.inbound_domain}"
         end
-        
+
         # Look through our user model, and see if we can find someone with the same email address,
         # and if so, assign them as the subject of this customer
-        def assign_user_subject!(scope=nil)
-          if !Universal::Configuration.class_name_user.blank? and self.subject.nil?
-            if Universal::Configuration.user_scoped
-              user = Universal::Configuration.class_name_user.classify.constantize.find_by(scope: scope, email: self.email)
-            else
-              user = Universal::Configuration.class_name_user.classify.constantize.find_by(email: self.email)
-            end
-            self.update(subject: user, kind: :user) if !user.nil?
-          end
+        def assign_user_subject!(scope = nil)
+          return unless Universal::Configuration.class_name_user.present? && subject.nil?
+
+          user = if Universal::Configuration.user_scoped
+                   Universal::Configuration.class_name_user.classify.constantize.find_by(scope: scope,
+                                                                                         email: email)
+                 else
+                   Universal::Configuration.class_name_user.classify.constantize.find_by(email: email)
+                 end
+          update(subject: user, kind: :user) unless user.nil?
         end
-        
+
         def to_json(config)
-          return {
-            id: self.id.to_s,
-            status: self.status,
-            number: self.number.to_s, 
-            name: self.name,
-            position: self.position,
-            email: self.email, 
-            phone_home: self.phone_home,
-            phone_work: self.phone_work,
-            phone_mobile: self.phone_mobile,
-            tags: self.tags,
-            ticket_count: self.tickets.count, 
-            token: self.token,
-            inbound_email_address: self.inbound_email_address(config),
-            closed_ticket_count: self.tickets.unscoped.closed.count,
-            companies: self.companies.map{|c| c.to_json(config)},
-            subject_type: self.subject_type,
-            subject_id: self.subject_id.to_s
-            }
+          {
+            id: id.to_s,
+            status: status,
+            number: number.to_s,
+            name: name,
+            position: position,
+            email: email,
+            phone_home: phone_home,
+            phone_work: phone_work,
+            phone_mobile: phone_mobile,
+            tags: tags,
+            ticket_count: tickets.count,
+            token: token,
+            inbound_email_address: inbound_email_address(config),
+            closed_ticket_count: tickets.unscoped.closed.count,
+            companies: companies.map { |c| c.to_json(config) },
+            subject_type: subject_type,
+            subject_id: subject_id.to_s
+          }
         end
-        
+
         def block!(user)
-          self.comments.create content: 'Customer blocked', author: user.name, when: Time.now.utc
-          self.blocked!
+          comments.create content: 'Customer blocked', author: user.name, when: Time.now.utc
+          blocked!
         end
-        
+
         def unblock!(user)
-          self.comments.create content: 'Customer unblocked', author: user.name, when: Time.now.utc
-          self.active!
+          comments.create content: 'Customer unblocked', author: user.name, when: Time.now.utc
+          active!
         end
-        
       end
-      
-      private
-      
     end
   end
 end
