@@ -23,7 +23,7 @@ gem 'rmagick'
 gem 'sass-rails'
 gem 'uglifier'
 
-gem 'universal', git: 'https://github.com/dominioncross/universal', branch: 'qa/2.0.0'
+gem 'universal', git: 'https://github.com/dominioncross/universal', tag: '2.0.0'
 
 group :development, :test do
   gem 'database_cleaner', '1.7.0'

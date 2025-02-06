@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/dominioncross/universal
-  revision: 685c5df21053a31693f2e82e41b53ab157a60949
-  branch: qa/2.0.0
+  revision: 9d45ee860ad3948248f73e5c0cb9e8803a2ee956
+  tag: 2.0.0
   specs:
     universal (2.0.0)
       geocoder
