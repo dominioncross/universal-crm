@@ -175,7 +175,7 @@ module UniversalCrm
                   inbound_message&.update(scope: ticket.scope)
 
                   ticket_subject = ticket.subject
-                  user = (ticket_subject.instance_of?(Universal::Configuration.class_name_user) ? ticket_subject : nil)
+                  user = (ticket_subject.instance_of?(Universal::Configuration.class_name_user&.constantize) ? ticket_subject : nil)
                   ticket.open!(user)
                   ticket.update(kind: :email)
                   ticket.comments.create content: params['TextBody'].hideQuotedLines,
