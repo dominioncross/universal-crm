@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module UniversalCrm
-  class Mailer < ApplicationMailer
+  class Mailer < ActionMailer::Base
     include UniversalCrm::Concerns::MailConcern
 
     def new_ticket(config, customer, ticket, sent_from_crm = true)
