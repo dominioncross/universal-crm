@@ -47,7 +47,7 @@ module UniversalCrm
 
         # find the scope:
         crm_customers.each do |customer|
-          customer.update(name: name&.strip, email: email&.strip.downcase)
+          customer.update(name: name.to_s.strip, email: email.to_s.strip.downcase)
         end
       end
     end
