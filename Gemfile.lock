@@ -20,14 +20,14 @@ GIT
 PATH
   remote: .
   specs:
-    universal-crm (1.1.4)
+    universal-crm (1.1.5)
       bootstrap-sass
       carrierwave
       carrierwave-mongoid
       geocoder
       haml
       mongoid
-      rails (>= 6.1.7.10, < 7.1)
+      rails (>= 6.1.7.10, <= 8.2.0)
       react-rails
       universal
 
@@ -190,6 +190,8 @@ GEM
       railties (>= 3.2.16)
     json (2.9.1)
     language_server-protocol (3.17.0.4)
+    light-service (0.20.0)
+      activesupport (>= 5.0, < 9.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -415,6 +417,7 @@ DEPENDENCIES
   guard-rubocop
   haml
   jquery-ui-rails
+  light-service
   mongo
   mongoid
   mongoid_auto_increment

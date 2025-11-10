@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'geocoder'
   s.add_dependency 'haml'
   s.add_dependency 'mongoid'
-  s.add_dependency 'rails', '>= 6.1.7.10', '< 7.1'
+  s.add_dependency 'rails', '>= 6.1.7.10', '<= 8.2.0'
   s.add_dependency 'react-rails'
   s.add_dependency 'universal'
   s.metadata['rubygems_mfa_required'] = 'true'
